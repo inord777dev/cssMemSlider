@@ -1,0 +1,185 @@
+:root {
+    --max-width: 50rem;  
+    --color-black: rgb(0, 0, 0);
+    --color-white: rgb(255, 255, 255);
+    --color-blue: rgb(113, 172, 255);  
+    --color-hover: rgb(242, 245, 248);
+    --color-active: rgb(216, 231, 6);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--color-black);
+    color: var(--color-white);
+}
+
+input {
+    display: none;
+}
+
+img {
+    max-width: 100%;
+    display: block;
+    transition: transform 0.7s;
+}
+
+main {
+    max-width: var(--max-width);
+
+    margin: 0 auto;
+
+    padding: 3%;
+
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    grid-template-areas: "pic pic"
+                         "txt btn";
+    gap: 1rem 0;    
+}
+
+.pic {
+    grid-area: pic;
+
+    margin: auto;
+}
+
+.txt {
+    grid-area: txt;
+}
+
+.btn {
+    grid-area: btn;
+
+    display: flex;
+    justify-content: right;
+    align-items: flex-start;
+}
+
+.slider {
+    max-width: var(--max-width);
+
+    display: flex;
+    border-radius: 5%;
+
+    overflow: hidden;
+}
+
+.elements_wrappers {
+    display: flex;
+    justify-content: space-between;
+}
+
+.inputs-area {
+    display: flex;
+}
+
+.radio_label {
+    padding: 0.2rem;
+    cursor: pointer;
+    transition: all 0.5s;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.radio-item {
+    width: 1rem;
+    height: 1rem;
+    border-radius: 50%;
+    background-color: var(--color-blue);
+    display: block;
+    border: 0.125rem solid var(--color-blue);
+    -webkit-tap-highlight-color: transparent;
+    transition: all 0.5s;
+}
+
+.radio_label:hover .radio-item {
+    background-color: var(--color-hover);
+    border-color: var(--color-hover);
+}
+
+.radio_label:active .radio-item {
+    background-color: var(--color-active);
+    border-color: var(--color-active);
+}
+  
+#slide_1:checked ~ .btn .elements_wrappers #bullet_1 .radio-item,
+#slide_2:checked ~ .btn .elements_wrappers #bullet_2 .radio-item,
+#slide_3:checked ~ .btn .elements_wrappers #bullet_3 .radio-item,
+#slide_4:checked ~ .btn .elements_wrappers #bullet_4 .radio-item {
+    background-color: var(--color-black);
+}
+
+#slide_1:checked ~ .pic .slider img {
+    transform: translateX(0);
+}
+
+#slide_2:checked ~ .pic .slider img {
+    transform: translateX(-100%);
+}
+
+#slide_3:checked ~ .pic .slider img {
+    transform: translateX(-200%);
+}
+  
+#slide_4:checked ~ .pic .slider img {
+    transform: translateX(-300%);
+}
+  
+.text-wrapper {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.text-item {
+    display: none;
+}
+  
+#slide_1:checked ~ .txt .text-wrapper .text-item:nth-child(1),
+#slide_2:checked ~ .txt .text-wrapper .text-item:nth-child(2),
+#slide_3:checked ~ .txt .text-wrapper .text-item:nth-child(3),
+#slide_4:checked ~ .txt .text-wrapper .text-item:nth-child(4) {
+    display: block;
+    animation: 0.5s ease-in-out text_show;
+}
+
+@keyframes text_show {
+    from {
+      opacity: 0;
+      transform: translateX(-3vw);
+      z-index: -1;
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+      z-index: 2;
+    }
+}
+
+@media (max-width: 40rem) {
+    main {
+        grid-template-columns: 1fr;
+        grid-template-rows: 0.5fr 0.2fr 1fr;
+        grid-template-areas: "pic"
+                             "btn"
+                             "txt";
+        gap: 0.1rem;    
+    }
+
+    .btn {
+        grid-area: btn;
+    
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    br {
+        display: none;
+    }
+} 
