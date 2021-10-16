@@ -178,4 +178,8 @@ main {
         justify-content: center;
         align-items: center;
     }
+
+    br {
+        display: none;
+    }
 } 
